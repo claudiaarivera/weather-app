@@ -17,7 +17,7 @@ import {
   switchMap,
 } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { LocationFormatedPipe } from '../../pipes/location-formated.pipe';
+import { FormatLocationPipe } from '../../pipes/format-location.pipe';
 import { Location } from '../../interfaces';
 import { CommonModule } from '@angular/common';
 
@@ -27,7 +27,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     LucideAngularModule,
     ReactiveFormsModule,
-    LocationFormatedPipe,
+    FormatLocationPipe,
     CommonModule
   ],
   templateUrl: './search-box.component.html',

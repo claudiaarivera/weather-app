@@ -18,11 +18,8 @@
         fill="white"
       />
     </svg>
-    <div class="self-center flex items-center space-x-2">
-      <button class="hover:underline hover:text-yellow-200 flex items-center gap-1">
-        <lucide-angular [img]="mapIcon"></lucide-angular>
-        <span class="font-semibold text-sm">Rímac, Lima, Perú</span>
-      </button>
+    <div class="self-center flex items-center space-x-3">
+      <app-city-display></app-city-display>
       <app-search-box></app-search-box>
     </div>
     <a target="_blank" href="https://github.com/claudiaarivera/weather-app" class="bg-yellow-100 font-semibold text-midnight-900 rounded-full py-2 px-5 flex items-center space-x-1">

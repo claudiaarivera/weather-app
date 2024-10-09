@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { LucideAngularModule, LucideIconConfig, MapPin, Github } from 'lucide-angular';
 import { SearchBoxComponent } from '../search-box/search-box.component';
+import { CityDisplayComponent } from '../city-display/city-display.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [LucideAngularModule, SearchBoxComponent],
+  imports: [LucideAngularModule, SearchBoxComponent, CityDisplayComponent],
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {

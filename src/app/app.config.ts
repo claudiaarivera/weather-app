@@ -15,6 +15,7 @@ import {
   Gauge,
   Lightbulb,
   LucideAngularModule,
+  MapPin,
   Meh,
   Search,
   Skull,
@@ -55,7 +56,8 @@ export const appConfig: ApplicationConfig = {
         Meh,
         Frown,
         Skull,
-        UsersRound
+        UsersRound,
+        MapPin
       })
     ),
   ],
