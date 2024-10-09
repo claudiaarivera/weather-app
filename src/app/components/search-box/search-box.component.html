@@ -1,0 +1,82 @@
+<form class="relative" (submit)="$event.preventDefault()">
+  <div class="absolute top-1/2 transform -translate-y-1/2 left-2">
+    <lucide-angular name="search" class="text-midnight-50"></lucide-angular>
+  </div>
+  <input
+    type="text"
+    [formControl]="cityInput"
+    (focus)="setsearchDropdown(true)"
+    placeholder="Search places"
+    [ngClass]="{
+      'bg-midnight-800 shadow-[0_-15px_30px_1px_rgba(0,0,0,0.05)]':
+        searchDropdownisOpen,
+      'bg-transparent': !searchDropdownisOpen
+    }"
+    class="py-2 rounded-t-lg border pl-10 pr-5 text-midnight-50 placeholder:text-midnight-300 border-transparent focus:outline-none focus:placeholder:text-midnight-50 placeholder:font-light"
+  />
+  @if (searchDropdownisOpen) {
+  <div
+    class="absolute z-50 w-full bg-midnight-800 rounded-b-lg shadow-[0_20px_30px_1px_rgba(0,0,0,0.05)]"
+  >
+    <ul
+      class="space-y-2 max-h-[500px] p-2 overflow-y-auto overflow-hidden [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-midnight-400 [&::-webkit-scrollbar-thumb]:bg-midnight-700"
+    >
+      @for (location of searchResultsToDisplay(); track location.id || $index) {
+        <li
+          class="py-2 px-3 hover:bg-midnight-700 rounded-md cursor-pointer"
+          (click)="setCurrentLocation(location, $event)"
+        >
+          <div class="flex items-center gap-x-3">
+            <span class="text-sm text-gray-800 dark:text-neutral-200">{{
+              location | geocodingLocationFormated
+            }}</span>
+          </div>
+        </li>
+      }
+      @empty { 
+        @if (cityInput.value) {
+          <li class="py-2 px-3 text-center pointer-events-none select-none">
+            There are no results.
+          </li>
+        } 
+      } 
+      @if (searchResultsToDisplay().length === 0 && !cityInput.value) {
+        @if (recentLocations().length > 0) {
+          <li class="px-3 text-sm text-midnight-50">Recent</li>
+        }
+        @for (location of recentLocations(); track $index) {
+          <li class="py-2 px-3 hover:bg-midnight-700 rounded-md cursor-pointer">
+            <div
+              class="flex items-center gap-x-3"
+              (click)="setCurrentLocation(location, $event)"
+            >
+              <span class="text-sm text-gray-800 dark:text-neutral-200">{{
+                location | geocodingLocationFormated
+              }}</span>
+            </div>
+          </li>
+        }
+        @empty { 
+          <li class="py-2 px-3 text-center pointer-events-none select-none">
+            There are no recent searches.
+          </li>
+        }
+      } 
+      <!--  <li class="py-2 px-3 text-center pointer-events-none select-none">
+            There are no results.
+          </li>-->
+    </ul>
+  </div>
+  }
+</form>
+<!--<div>
+    <div class="relative flex items-center mt-2">
+        <span class="absolute">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-3 text-gray-400 dark:text-gray-500">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+            </svg>
+        </span>
+
+        <input type="email" placeholder="john@example.com" class="block w-full py-2.5 text-gray-700 placeholder-gray-400/70 bg-white border border-gray-200 rounded-lg pl-11 pr-5 focus:border-yellow-400 focus:ring-yellow-300 focus:outline-none focus:ring focus:ring-opacity-40">
+    </div>
+</div>-->

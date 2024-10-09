@@ -1,0 +1,3 @@
+@if (humidity()) {
+  <app-metric title="Humidity" [value]="humidity()!" icon="droplet" unit="%" [bottomText]="humidityScale()"></app-metric>
+}

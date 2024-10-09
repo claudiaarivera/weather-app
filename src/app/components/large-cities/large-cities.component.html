@@ -1,0 +1,25 @@
+<h3 class="font-semibold text-midnight-100 text-2xl mb-6">
+  Other cities
+</h3>
+@let citiesWeather = largeCitiesWeather();
+<div class="flex flex-col space-y-3.5">
+  @for (weather of citiesWeather; track weather.location_id || $index; let i = $index) {
+    @let weatherCondition = weather.current.weather_code | weatherCondition;
+    <div class="flex items-center justify-between">
+      <div class="flex-1">
+        <div class="text-midnight-50 flex-initial w-28">{{weather.city.name}}</div>
+        <div class="text-midnight-200 text-sm">{{weather.city.country}}</div>
+      </div>
+      @if (weatherCondition) {
+        <div class="flex-1 flex items-center space-x-2">
+          <img class="object-cover w-8 h-8 flex-shrink-0" [src]="weatherCondition.img" alt="" />
+          <span class="text-sm text-midnight-200">{{weatherCondition.description}}</span>
+        </div>
+      }
+      <div class="flex-shrink-0 flex flex-col">
+        <span class="text-midnight-50">{{weather.daily.temperature_2m_max[0] | number: '1.0-0'}} °C</span>
+        <span class="text-sm text-midnight-300">{{weather.daily.temperature_2m_min[0]  | number: '1.0-0'}} °C</span>
+      </div>
+    </div>
+  }
+</div>

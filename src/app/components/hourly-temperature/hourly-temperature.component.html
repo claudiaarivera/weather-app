@@ -1,0 +1,20 @@
+<div class="flex flex-col items-center space-y-4">
+  @let weatherCondition = weatherCode() | weatherCondition;
+  <span class="font-medium text-midnight-50 text-opacity-90 text-sm">
+    {{ time | date : "HH aa" }}</span
+  >
+  <div class="w-14 h-14">
+    @if (weatherCondition) {
+    <img
+      class="w-full h-full object-cover"
+      [src]="weatherCondition.img"
+      alt=""
+    />
+    }
+  </div>
+  @if (temperature) {
+  <span class="text-midnight-200 font-semibold"
+    >{{ temperature | number : "1.1-1" }} °C</span
+  >
+  }
+</div>

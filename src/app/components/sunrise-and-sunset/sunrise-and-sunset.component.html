@@ -1,0 +1,30 @@
+<app-weather-detail-title
+  cssClass="mb-5"
+  title="Sunrise and sunset"
+></app-weather-detail-title>
+@if (daily()) {
+<div class="flex flex-col space-y-12">
+  <div class="flex items-center space-x-8">
+    <lucide-icon name="sunrise" size="45" class="text-yellow-600"></lucide-icon>
+    <div class="font-semibold space-y-1">
+      <h5 class="text-midnight-200">Sunrise</h5>
+      @if (sunrise()) {
+      <div class="text-2xl text-midnight-50">
+        {{ sunrise()![0] | date : "h:mm aa" }}
+      </div>
+      }
+    </div>
+  </div>
+  <div class="flex items-center space-x-8">
+    <lucide-icon name="sunset" size="45" class="text-yellow-600"></lucide-icon>
+    <div class="font-semibold space-y-1">
+      <h5 class="text-midnight-200">Sunset</h5>
+      @if (sunset()) {
+      <div class="text-2xl text-midnight-50">
+        {{ sunset()![0] | date : "h:mm aa" }}
+      </div>
+      }
+    </div>
+  </div>
+</div>
+}

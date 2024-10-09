@@ -1,0 +1,3 @@
+@if (pressure()) {
+  <app-metric title="Pressure" [value]="(pressure() | number: '1.0-0')! " icon="gauge" unit="hPa"></app-metric>
+}

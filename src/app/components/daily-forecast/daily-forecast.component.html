@@ -1,0 +1,20 @@
+@if (hourly()) {
+  <h2 class="text-midnight-50 font-semibold text-2xl mb-6">
+    Today's Highlight
+  </h2>
+  <div
+    class="bg-midnight-800 border border-midnight-700 border-opacity-30 rounded-2xl px-4 py-6 bg-opacity-30"
+  >
+    <div class="overflow-hidden" emblaCarousel [options]="options">
+      <div class="flex">
+        @for (hour of hourly()!.time; track hour; let i = $index) {
+        <div class="min-w-0 flex-[0_0_80px] mr-10">
+          <app-hourly-temperature [temperature]="hourly()!.temperature_2m[i]" [time]="hour" [weatherCode]="weatherCodes()![i]"></app-hourly-temperature>
+        </div>
+        }@empty {
+        <p>Daily weather data is not available 😥</p>
+        }
+      </div>
+    </div>
+  </div>
+}

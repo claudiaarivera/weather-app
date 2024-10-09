@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Nueva York",
+    "timezone": "America/New_York",
+    "coord": {
+      "lat": 40.7128,
+      "lon": -74.006
+    },
+    "country": "US"
+  },
+  {
+    "name": "Tokio",
+    "timezone": "Asia/Tokyo",
+    "coord": {
+      "lat": 35.6762,
+      "lon": 139.6503
+    },
+    "country": "JP"
+  },
+  {
+    "name": "Londres",
+    "timezone": "Europe/London",
+    "coord": {
+      "lat": 51.5074,
+      "lon": -0.1278
+    },
+    "country": "GB"
+  },
+  {
+    "name": "Madrid",
+    "timezone": "Europe/Madrid",
+    "coord": {
+      "lat": 40.4168,
+      "lon": -3.7038
+    },
+    "country": "ES"
+  },
+  {
+    "name": "Ciudad de México",
+    "timezone": "America/Mexico_City",
+    "coord": {
+      "lat": 19.4326,
+      "lon": -99.1332
+    },
+    "country": "MX"
+  }
+]

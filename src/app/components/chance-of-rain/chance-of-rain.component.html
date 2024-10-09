@@ -1,0 +1,14 @@
+@if (hoursClosetToNow()) {
+  <h3 class="font-semibold text-midnight-100 text-2xl mb-6">Chance of rain</h3>
+  <div class="space-y-3">
+    @for (hour of hoursClosetToNow(); track $index; let i = $index) {
+      <div class="flex items-center gap-x-3">
+        <div class="text-midnight-100 text-sm w-12">{{hour | date: 'hh aa'}}</div>
+        <app-progress-bar class="flex-1" [value]="precProbability()?.[i] || 0"></app-progress-bar>
+        @if (precProbability()) {
+          <div class="text-midnight-100 text-sm w-10 text-end">{{precProbability()![i]}}%</div>
+        }
+      </div>
+    }
+  </div>
+}

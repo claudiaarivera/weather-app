@@ -1,0 +1,18 @@
+<app-weather-detail-title
+  cssClass="mb-5"
+  [title]="title"
+></app-weather-detail-title>
+<div class="flex items-center space-x-4">
+  <lucide-icon [name]="icon" size="45" class="text-midnight-400"></lucide-icon>
+  <div class="space-y-0.5">
+    <div class="text-midnight-50 text-2xl">
+      <span>{{ value }}</span>
+      @if (unit) {
+        <span class="text-midnight-100 ml-1">{{ unit }}</span>
+      }
+    </div>
+    @if (bottomText) {
+      <div class="text-midnight-200">{{bottomText}}</div>
+    }
+  </div>
+</div>

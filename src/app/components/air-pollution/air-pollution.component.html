@@ -1,0 +1,18 @@
+@if (airQualityIndex()) {
+  <app-weather-detail-title
+    title="Air Pollution"
+    cssClass="mb-5"
+  ></app-weather-detail-title>
+  <app-weather-progress
+    cssClass="aqi-scale"
+    [value]="airQualityPercent()"
+  ></app-weather-progress>
+  @let aqiScale = airQualityIndex()! | aqiScale;
+  <div class="flex items-center justify-between pt-2">
+    <p class="text-midnight-300">
+      Air quality is
+      <span class="text-midnight-50 ml-1">{{ aqiScale?.description }}</span>
+    </p>
+    <lucide-icon [name]="aqiScale?.icon"></lucide-icon>
+  </div>
+}

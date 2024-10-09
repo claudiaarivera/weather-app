@@ -1,0 +1,4 @@
+@if (windStatus() && weatherTime()) {
+  @let time = weatherTime() | date: 'hh:mm a';
+  <app-metric title="Wind status" [value]="windStatus()!" icon="wind" unit="km/h" [bottomText]="time!"></app-metric>
+}

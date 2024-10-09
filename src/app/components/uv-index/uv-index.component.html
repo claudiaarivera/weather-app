@@ -1,0 +1,20 @@
+@if (uviScale()) {
+  <app-weather-detail-title
+    title="UV index"
+    cssClass="mb-5"
+  ></app-weather-detail-title>
+  <div class="mb-3 text-lg text-midnight-50 flex items-center space-x-2">
+    <div class="flex items-center space-x-1">
+      <span>{{ uvi() }}</span
+      ><span>(UVI)</span>
+    </div>
+    <span class="text-sm text-midnight-100 ml-1">{{ uviScale()!.name }}</span>
+  </div>
+  <app-weather-progress
+    cssClass="uv-index-scale mb-3"
+    [value]="uviPercent()"
+  ></app-weather-progress>
+  <p class="text-sm text-midnight-200 flex items-center space-x-2">
+    <lucide-icon name="lightbulb"></lucide-icon><span>{{ uviScale()!.tip }}</span>
+  </p>
+}
