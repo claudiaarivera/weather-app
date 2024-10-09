@@ -2,13 +2,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Location } from '../interfaces';
 
 @Pipe({
-  name: 'geocodingLocationFormated',
+  name: 'locationFormated',
   standalone: true,
 })
 
-export class GeocodingLocationFormatedPipe implements PipeTransform {
+export class LocationFormatedPipe implements PipeTransform {
   transform({ name, admin1, country}: Location): string | null{
     if (!name) return null;
-    return `${name}, ${admin1}, ${country}`
+    const stringsOnly = [name, admin1, country].filter((value): value is string  => !!value);
+    return `${stringsOnly.join(',')}`
   }
 }

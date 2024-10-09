@@ -4,7 +4,6 @@ import {
   ElementRef,
   HostListener,
   inject,
-  OnInit,
   signal,
 } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
@@ -18,8 +17,8 @@ import {
   switchMap,
 } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { GeocodingLocationFormatedPipe } from '../../pipes/geocoding-location-formated.pipe';
-import { Geocoding, Location } from '../../interfaces';
+import { LocationFormatedPipe } from '../../pipes/location-formated.pipe';
+import { Location } from '../../interfaces';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -28,12 +27,12 @@ import { CommonModule } from '@angular/common';
   imports: [
     LucideAngularModule,
     ReactiveFormsModule,
-    GeocodingLocationFormatedPipe,
+    LocationFormatedPipe,
     CommonModule
   ],
   templateUrl: './search-box.component.html',
 })
-export class SearchBoxComponent implements OnInit {
+export class SearchBoxComponent{
   private weatherService = inject(WeatherService);
   private fb = inject(FormBuilder);
   public cityInput = this.fb.nonNullable.control('');
@@ -41,7 +40,6 @@ export class SearchBoxComponent implements OnInit {
   public rawSearchResults = toSignal(
     this.cityInput.valueChanges.pipe(
       debounceTime(1000),
-      //map((value) => [...new Set(value)].join('')),
       filter((value) => value.length > 3),
       distinctUntilChanged(),
       switchMap((value) => this.weatherService.getGeocoding(value)),
@@ -72,7 +70,5 @@ export class SearchBoxComponent implements OnInit {
   }
   clearSearchResults(){
     this.searchResults().set([]);
-  }
-  ngOnInit(): void {
   }
 }
