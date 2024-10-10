@@ -1,6 +1,6 @@
 <div class="relative h-3 rounded-full bg-gradient-to-r w-full bg-midnight-400" [ngClass]="cssClass">
   <div
     class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 left-0 w-4 h-4 bg-white shadow-md border border-midnight-300 rounded-full transition-[left] duration-700 ease-out"
-    [ngStyle]="{'left': percent < 0 ? 0 : percent + '%'}"
+    [ngStyle]="{'left': value < 0 ? 0 : value + '%'}"
   ></div>
 </div>

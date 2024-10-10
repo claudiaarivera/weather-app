@@ -61,7 +61,7 @@ export class SearchBoxComponent{
   setsearchDropdown(isOpen: boolean) {
     this.searchDropdownisOpen = isOpen;
   }
-  setCurrentLocation(location: Location, e: Event) {
+  searchCityWeather(location: Location, e: Event){
     e.stopPropagation();
     this.weatherService.setCurrentLocation(location);
     this.setsearchDropdown(false);

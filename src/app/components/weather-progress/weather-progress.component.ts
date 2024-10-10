@@ -7,13 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
   imports: [CommonModule],
   templateUrl: './weather-progress.component.html',
 })
-export class WeatherProgressComponent implements OnInit{
+export class WeatherProgressComponent {
   @Input() cssClass: string = '';
   @Input() value: number = 0;
-  public percent: number = 0;
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.percent = this.value;
-    }, 500);
-  }
+
 }

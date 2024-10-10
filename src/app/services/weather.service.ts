@@ -72,20 +72,27 @@ export class WeatherService {
         this.currentLocation() &&
         this.currentLocation() !== this.DEFAULT_LOCATION
       ) {
-        this.saveRecentLocationsToLocalStorage(this.currentLocation());
+        this.updateRecentCities(this.currentLocation());
+        this.saveRecentLocationsToLocalStorage();
       }
-    });
+    }, { allowSignalWrites: true});
   }
-  getRecentLocationsFromLocalStorage(): Location[] {
+  getRecentLocationsFromLocalStorage(): Location[]{
     const locations = localStorage.getItem('recent-locations');
     if (!locations) return [];
     return JSON.parse(locations);
   }
-  saveRecentLocationsToLocalStorage(location: Location) {
-    const locations = this.getRecentLocationsFromLocalStorage();
-    const isAlreadySave = locations.find(({ name }) => name === location.name);
-    const newLocations = isAlreadySave ? locations : [...locations, location];
-    localStorage.setItem('recent-locations', JSON.stringify(newLocations));
+  updateRecentCities(city: Location){
+    this._recentCities.update((cities) => {
+      const isAlreadySave = cities.find(({ name }) => name === city.name);
+      if (isAlreadySave) {
+        return cities;
+      }      
+      return [city, ...cities].slice(0, 10);
+    });
+  }
+  saveRecentLocationsToLocalStorage() {
+    localStorage.setItem('recent-locations', JSON.stringify(this._recentCities()));
   }
   getWeatherForecast({
     latitude,

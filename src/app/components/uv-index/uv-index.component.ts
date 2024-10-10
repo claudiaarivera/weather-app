@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, effect, inject } from '@angular/core';
 import { WeatherProgressComponent } from '../weather-progress/weather-progress.component';
 import { WeatherService } from '../../services/weather.service';
 import { uvIndexScales } from '../../data/uv-index-scales';
@@ -35,4 +35,6 @@ export class UvIndexComponent {
         : uvi >= scale.range[0]
     );
   });
+  constructor() {
+  }
 }

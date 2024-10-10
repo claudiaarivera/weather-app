@@ -10,7 +10,6 @@ export const uvIndexScales: UVIndexScale[] = [
     range: [3, 5],
     name: "Moderate",
     tip: "Wear sunglasses, use SPF 30+ sunscreen, and seek shade around midday.",
-
   },
   {
     range: [6, 7],

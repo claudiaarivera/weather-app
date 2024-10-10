@@ -24,7 +24,7 @@
       @for (location of searchResultsToDisplay(); track location.id || $index) {
         <li
           class="py-2 px-3 hover:bg-midnight-700 rounded-md cursor-pointer"
-          (click)="setCurrentLocation(location, $event)"
+          (click)="searchCityWeather(location, $event)"
         >
           <div class="flex items-center gap-x-3">
             <span class="text-sm text-gray-800 dark:text-neutral-200">{{
@@ -48,7 +48,7 @@
           <li class="py-2 px-3 hover:bg-midnight-700 rounded-md cursor-pointer">
             <div
               class="flex items-center gap-x-3"
-              (click)="setCurrentLocation(location, $event)"
+              (click)="searchCityWeather(location, $event)"
             >
               <span class="text-sm text-gray-800 dark:text-neutral-200">{{
                 location | formatLocation
