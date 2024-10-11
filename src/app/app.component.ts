@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { WeatherDetailTitleComponent } from './components/weather-detail-title/weather-detail-title.component';
@@ -19,9 +19,9 @@ import { LargeCitiesComponent } from './components/large-cities/large-cities.com
 import { CommonModule } from '@angular/common';
 import { ChanceOfRainComponent } from './components/chance-of-rain/chance-of-rain.component';
 import { WindStatusComponent } from './components/wind-status/wind-status.component';
-import { DewPointComponent } from './components/dew-point/dew-point.component';
 import { LoadingService } from './services/loading.service';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { WeatherService } from './services/weather.service';
 
 @Component({
   selector: 'app-root',
@@ -43,7 +43,6 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     PressureComponent,
     CloudCoverComponent,
     WindStatusComponent,
-    DewPointComponent,
     MapComponent,
     LargeCitiesComponent,
     ChanceOfRainComponent,
@@ -54,10 +53,10 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
+  private weatherService = inject(WeatherService);
   private loadingService = inject(LoadingService);
   public isLoading =  this.loadingService.isLoading;
-  public cargando = signal(true); 
-  //public isLoading = this.loadingService.isLoading;
+  public weather = this.weatherService.weather;
   constructor(){
   }
   ngOnInit(): void {}

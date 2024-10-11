@@ -40,6 +40,7 @@ export class MapComponent implements OnInit{
       zoom: 10,
       minZoom: 10,
       center: [-12.0702, -77.0251],
+      scrollWheelZoom: false
     }); //.setView([-12.0702, -77.0251], 12);
 
     tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {

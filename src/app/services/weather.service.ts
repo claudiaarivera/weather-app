@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { catchError, delay, map, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, filter, map, Observable, of, switchMap, tap } from 'rxjs';
 import {
   AirPollution,
   Geocoding,
@@ -67,38 +67,51 @@ export class WeatherService {
     );
   });
   constructor() {
-    effect(() => {
-      if (
-        this.currentLocation() &&
-        this.currentLocation() !== this.DEFAULT_LOCATION
-      ) {
-        this.updateRecentCities(this.currentLocation());
-        this.saveRecentLocationsToLocalStorage();
+    effect(
+      () => {
+        if (
+          this.currentLocation() &&
+          this.currentLocation() !== this.DEFAULT_LOCATION
+        ) {
+          this.updateRecentCities(this.currentLocation());
+          this.saveRecentLocationsToLocalStorage();
+        }
+      },
+      { allowSignalWrites: true }
+    );
+  }
+  getRecentLocationsFromLocalStorage(): Location[] {
+    const cities = localStorage.getItem('recent-locations');
+    if (!cities) return [];
+    try {
+      const cityList = JSON.parse(cities);
+      if (!Array.isArray(cityList)) {
+        return [];
       }
-    }, { allowSignalWrites: true});
+      return cityList;
+    } catch (error) {
+      return [];
+    }
   }
-  getRecentLocationsFromLocalStorage(): Location[]{
-    const locations = localStorage.getItem('recent-locations');
-    if (!locations) return [];
-    return JSON.parse(locations);
-  }
-  updateRecentCities(city: Location){
+  updateRecentCities(city: Location) {
     this._recentCities.update((cities) => {
       const isAlreadySave = cities.find(({ name }) => name === city.name);
       if (isAlreadySave) {
         return cities;
-      }      
+      }
       return [city, ...cities].slice(0, 10);
     });
   }
   saveRecentLocationsToLocalStorage() {
-    localStorage.setItem('recent-locations', JSON.stringify(this._recentCities()));
+    localStorage.setItem(
+      'recent-locations',
+      JSON.stringify(this._recentCities())
+    );
   }
-  getWeatherForecast({
-    latitude,
-    longitude,
-    timezone,
-  }: Location): Observable<WeatherForecast | undefined> {
+  getWeatherForecast(
+    location: Location
+  ): Observable<WeatherForecast | undefined> {
+    const { latitude, longitude, timezone } = location;
     let params = new HttpParams();
     params = params.set('latitude', latitude);
     params = params.set('longitude', longitude);
@@ -131,7 +144,9 @@ export class WeatherService {
             },
           };
         }),
-        catchError(() => of(undefined))
+        catchError(({ error, status }) => {
+          return of(undefined);
+        })
       );
   }
   getLargeCitiesWeather(): Observable<LargeCityWeather[]> {
@@ -174,9 +189,10 @@ export class WeatherService {
     return this._http
       .get<GeocodingResponse>(`${this._geocodingApiUrl}/search?name=${city}`)
       .pipe(
+        map((response) => response.results?.filter((geocoding) => !!geocoding.timezone && geocoding.feature_code !== 'PCLI' && geocoding.feature_code !== 'PCLD')),
         map(
-          (response) =>
-            response.results?.map(
+          (geocoding) =>
+            geocoding?.map(
               ({
                 admin1,
                 country,

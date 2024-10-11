@@ -1,26 +1,27 @@
 <h3 class="font-semibold text-midnight-100 text-2xl mb-6">
   7 Day Forecast
 </h3>
+
 <div class="flex flex-col space-y-3.5">
   @if (daily()) { @let time = daily()!.time; 
     @for (day of time; track $index; let i = $index) {
       @let weatherCondition = daily()!.weather_code[i] | weatherCondition;
 
-      <div class="flex items-center justify-between">
-        <div class="flex-1">
+      <div class="flex space-x-2 items-center justify-between">
+        <div class="flex-initial">
           <div class="text-midnight-300 text-sm">{{ day | date : "EEEE" }}</div>
           <div class="text-midnight-50">{{ day | date : "MMMM d" }}</div>
         </div>
         @if (weatherCondition) {
-          <div class="flex-1 flex items-center space-x-2">
+          <div class="flex-none w-28 flex items-center space-x-2">
             <div class="object-cover w-8 h-8 flex-shrink-0">
               <img class="h-full w-full" [src]="weatherCondition.img" alt="" />
             </div>
             <span class="text-sm text-midnight-50">{{weatherCondition.description}} </span>
           </div>
         }
-        <div class="flex-initial text-midnight-300">
-          <span class="text-midnight-50 mr-2"
+        <div class="flex-initial flex flex-col sm:flex-row text-midnight-300">
+          <span class="text-midnight-50 mr-2 text-sm sm:text-base"
             >{{ daily()!.temperature_2m_max[i] | number: '1.0-0'}} °C</span
           >{{ daily()!.temperature_2m_min[i] | number: '1.0-0'}}°C
         </div>

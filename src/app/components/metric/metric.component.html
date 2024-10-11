@@ -3,12 +3,12 @@
   [title]="title"
 ></app-weather-detail-title>
 <div class="flex items-center space-x-4">
-  <lucide-icon [name]="icon" size="45" class="text-midnight-400"></lucide-icon>
+  <lucide-icon [name]="icon" size="45" class="text-midnight-400 w-9 h-9 md:w-11 md:h-11"></lucide-icon>
   <div class="space-y-0.5">
-    <div class="text-midnight-50 text-2xl">
+    <div class="text-midnight-50 text-xl md:text-2xl text-pretty">
       <span>{{ value }}</span>
       @if (unit) {
-        <span class="text-midnight-100 ml-1">{{ unit }}</span>
+        <span class="text-midnight-100 ml-1 text-lg md:text-current">{{ unit }}</span>
       }
     </div>
     @if (bottomText) {

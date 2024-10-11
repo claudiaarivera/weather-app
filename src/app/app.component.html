@@ -3,54 +3,58 @@
   @if (isLoading()) {
     <app-spinner></app-spinner>
   }
-  <div class="grid grid-cols-12 gap-x-10 gap-y-12">
-    <app-temperature class="col-span-3"></app-temperature>
-    <div class="col-span-6">
-      <app-daily-forecast></app-daily-forecast>
-    </div>
-    <div class="col-span-3">
-      <div class="mb-8">
-        <app-air-pollution></app-air-pollution>
+  @if (weather()) {
+    <div class="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-x-10 gap-y-12">
+      <app-temperature class="col-span-2 sm:col-span-2 xl:col-span-2"></app-temperature>
+      <div class="col-span-2 sm:row-start-2 sm:col-start-1 sm:col-span-4 xl:col-start-3 xl:row-start-1 xl:col-span-4">
+        <app-daily-forecast></app-daily-forecast>
       </div>
-      <app-uv-index></app-uv-index>
+      <div class="col-span-2 sm:col-start-3 sm:row-start-1 xl:col-start-7 xl:col-span-2">
+        <div class="mb-8">
+          <app-air-pollution></app-air-pollution>
+        </div>
+        <app-uv-index></app-uv-index>
+      </div>
+      <!--<div class="col-span-2">
+        <app-chance-of-rain></app-chance-of-rain>
+      </div>-->
+      <div class="col-span-2 lg:row-span-2 lg:col-span-1 xl:col-span-2 2xl:row-auto 2xl:col-span-2">
+        <app-sunrise-and-sunset></app-sunrise-and-sunset>
+      </div>
+      <div class="col-span-1 xl:col-span-2 2xl:col-span-1">
+        <app-feels-like></app-feels-like>
+      </div>
+  
+      <div class="col-span-1 xl:col-span-2 2xl:col-span-1">
+        <app-visibility></app-visibility>
+      </div>
+      <!--<div class="col-span-1 row-span-2">
+        <app-dew-point></app-dew-point> 
+      </div> -->
+    
+      <div class="col-span-1 xl:col-span-2 2xl:col-span-1">
+        <app-cloud-cover></app-cloud-cover>
+      </div>
+      <div class="col-span-1 xl:col-span-2 2xl:col-span-1">
+        <app-pressure></app-pressure>
+      </div>
+      <div class="col-span-1 xl:col-span-2 2xl:col-span-1">
+        <app-humidity></app-humidity>
+      </div>
+      <div class="col-span-1 xl:col-span-2 2xl:col-span-1">
+        <app-wind-status></app-wind-status>
+      </div>
+      <div class="col-span-2 xl:col-span-2">
+        <app-forecast></app-forecast>
+      </div>
+      <div class="col-span-2 sm:col-span-4 xl:col-span-4">
+        <app-map></app-map>
+      </div>
+      <div class="col-span-2 sm:col-start-3 sm:row-start-5 xl:row-start-auto xl:col-span-2">
+        <app-large-cities></app-large-cities>
+      </div>
     </div>
-    <div class="col-span-3 row-span-2">
-      <app-chance-of-rain></app-chance-of-rain>
-    </div>
-    <div class="col-span-2 row-span-2">
-      <app-sunrise-and-sunset></app-sunrise-and-sunset>
-    </div>
-    <div class="col-span-2">
-      <app-feels-like></app-feels-like>
-    </div>
-    <div class="col-span-2">
-      <app-humidity></app-humidity>
-    </div>
-    <div class="col-span-2">
-      <app-visibility></app-visibility>
-    </div>
-    <div class="col-span-1 row-span-2">
-      <app-dew-point></app-dew-point> 
-    </div>
-    <div class="col-span-2">
-      <app-pressure></app-pressure>
-    </div>
-    <div class="col-span-2">
-      <app-cloud-cover></app-cloud-cover>
-    </div>
-    <div class="col-span-2">
-      <app-wind-status></app-wind-status>
-    </div>
-    <div class="col-span-3">
-      <app-forecast></app-forecast>
-    </div>
-    <div class="col-span-6">
-      <app-map></app-map>
-    </div>
-    <div class="col-span-3">
-      <app-large-cities></app-large-cities>
-    </div>
-  </div>
+  }
   <!--<div class="grid grid-cols-[max-content_1fr]">
     <div class=" p-5 flex items-center">
       <div class="flex flex-col">

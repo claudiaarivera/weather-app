@@ -71,4 +71,5 @@ export class SearchBoxComponent{
   clearSearchResults(){
     this.searchResults().set([]);
   }
+  
 }
